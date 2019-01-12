@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Addin
+    id = "com.jsuarezruiz.textgenerator">
+    <Header>
+        <Name>Text Generator Addin</Name>
+        <Description>VS4Mac addin with functionality to generate dummy text.</Description>
+        <Author>Javier Suárez</Author>
+        <Copyright>Javier Suárez</Copyright>
+        <Url>https://github.com/jsuarezruiz/VSMac-TextGenerator</Url>
+    </Header>
+    <Extension 
+        path = "/MonoDevelop/Ide/Commands/Edit">
+        <Command 
+            id = "TextGenerator.Commands.GenerateText"
+            _label = "Generate text..."
+            defaultHandler = "VS4Mac.TextGenerator.Commands.GenerateTextCommand" />
+    </Extension>
+    <Extension 
+        path = "/MonoDevelop/Ide/MainMenu/Edit">
+        <CommandItem 
+            id="TextGenerator.Commands.GenerateText" />
+    </Extension>
+</Addin>
