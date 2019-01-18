@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Addin
-    id = "com.jsuarezruiz.textgenerator">
+    id = "MonoDevelop.TextGenerator">
     <Header>
         <Name>Text Generator Addin</Name>
         <Description>VS4Mac addin with functionality to generate dummy text.</Description>
         <Author>Javier Suárez</Author>
-        <Copyright>Javier Suárez</Copyright>
+        <Copyright>Javier Suárez Ruiz</Copyright>
         <Url>https://github.com/jsuarezruiz/VSMac-TextGenerator</Url>
     </Header>
     <Extension 

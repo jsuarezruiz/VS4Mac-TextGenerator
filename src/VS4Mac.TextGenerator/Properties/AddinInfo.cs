@@ -1,13 +1,20 @@
-﻿using Mono.Addins;
+﻿using System;
+using System.Runtime.InteropServices;
+using Mono.Addins;
 using Mono.Addins.Description;
 
 [assembly: Addin(
-    "VS4Mac.TextGenerator",
-    Namespace = "VS4Mac.TextGenerator",
-    Version = "0.1"
+    "TextGenerator",
+    Namespace = "MonoDevelop",
+    Version = "0.1", 
+    Category = "IDE extensions"
 )]
 
-[assembly: AddinName("VS4Mac.TextGenerator")]
+[assembly: AddinName("Text Generator")]
 [assembly: AddinCategory("IDE extensions")]
-[assembly: AddinDescription("VS4Mac.TextGenerator")]
+[assembly: AddinDescription("A VS4Mac addin for generating dummy text.")]
 [assembly: AddinAuthor("Javier Suárez Ruiz")]
+[assembly: AddinUrl("https://github.com/jsuarezruiz/VS4Mac-TextGenerator")]
+
+[assembly: CLSCompliant(false)]
+[assembly: ComVisible(false)]
