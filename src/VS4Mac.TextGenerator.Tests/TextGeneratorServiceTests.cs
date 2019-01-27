@@ -23,5 +23,14 @@ namespace VS4Mac.TextGenerator.Tests
 
             Assert.AreEqual(2, words.Length);
         }
+
+        [Test]
+        public void GenerateCharactersTest()
+        {
+            var textGeneratorService = new TextGeneratorService();
+            var words = textGeneratorService.GenerateCharacters(5);
+
+            Assert.AreEqual(1, words.Length);
+        }
     }
 }
