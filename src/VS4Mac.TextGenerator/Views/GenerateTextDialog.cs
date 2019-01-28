@@ -20,7 +20,7 @@ namespace VS4Mac.TextGenerator.Views
         Label _optionsLabel;
         ComboBox _generatorOptionsComboBox;
 
-        TextGeneratorService _textGeneratorService;
+        LipsumGeneratorService _textGeneratorService;
 
         public GenerateTextDialog()
         {
@@ -33,7 +33,7 @@ namespace VS4Mac.TextGenerator.Views
         {
             Title = "Text Generator";
 
-            _textGeneratorService = new TextGeneratorService();
+            _textGeneratorService = new LipsumGeneratorService();
 
             _mainBox = new VBox
             {
