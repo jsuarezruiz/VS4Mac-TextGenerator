@@ -1,4 +1,5 @@
-﻿using NLipsum.Core;
+﻿using System.Linq;
+using NLipsum.Core;
 
 namespace VS4Mac.TextGenerator.Services
 {
@@ -20,8 +21,10 @@ namespace VS4Mac.TextGenerator.Services
 
         public string[] GenerateCharacters(int numberOfChars)
         {
-            string[] words = _generator.GenerateCharacters(numberOfChars);
-
+            //First three characters are \n or \r
+            var words = _generator.GenerateCharacters(numberOfChars + 3);
+            words[0] = words[0].Remove(0, 3);
+            
             return words;
         }
 

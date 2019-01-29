@@ -16,6 +16,10 @@ namespace VS4Mac.TextGenerator.Views
         HBox _buttonBox;
         Button _generateButton;
 
+        HBox _optionsBox;
+        Label _optionsLabel;
+        ComboBox _generatorOptionsComboBox;
+
         TextGeneratorService _textGeneratorService;
 
         public GenerateTextDialog()
@@ -33,8 +37,8 @@ namespace VS4Mac.TextGenerator.Views
 
             _mainBox = new VBox
             {
-                HeightRequest = 50,
-                WidthRequest = 200
+                HeightRequest = 100,
+                WidthRequest = 235
             };
 
             _numberBox = new HBox();
@@ -52,16 +56,30 @@ namespace VS4Mac.TextGenerator.Views
                 LabelColor = Styles.BaseSelectionTextColor,
                 WidthRequest = 48
             };
+
+            _optionsBox = new HBox();
+            _optionsLabel = new Label("Generator option:");
+            _generatorOptionsComboBox = new ComboBox();
+            _generatorOptionsComboBox.Items.Add("Characters");
+            _generatorOptionsComboBox.Items.Add("Words");
+            _generatorOptionsComboBox.Items.Add("Sentences");
+            _generatorOptionsComboBox.SelectedIndex = 1;
         }
 
         void BuildGui()
         {
+            _optionsBox.PackStart(_optionsLabel);
+            _optionsBox.PackEnd(_generatorOptionsComboBox);
+
             _numberBox.PackStart(_numberLabel, true);
             _numberBox.PackEnd(_numberEntry, false);
             _buttonBox.PackEnd(_generateButton);
 
+            _mainBox.PackStart(_optionsBox);
             _mainBox.PackStart(_numberBox);
             _mainBox.PackEnd(_buttonBox);
+
+            _numberEntry.SetFocus();
 
             Content = _mainBox;
             Resizable = false;
@@ -71,6 +89,12 @@ namespace VS4Mac.TextGenerator.Views
         {
             _numberEntry.Changed += OnNumberEntryChanged;
             _generateButton.Clicked += OnGenerateClicked;
+            _generatorOptionsComboBox.SelectionChanged += OnGeneratorOptionsChanged;
+        }
+
+        void OnGeneratorOptionsChanged(object sender, EventArgs e)
+        {
+            _numberLabel.Text = $"Introduce number of {_generatorOptionsComboBox.SelectedItem.ToString().ToLower()}:";
         }
 
         void OnNumberEntryChanged(object sender, EventArgs e)
@@ -86,8 +110,22 @@ namespace VS4Mac.TextGenerator.Views
             try
             {
                 var editor = IdeApp.Workbench.ActiveDocument.Editor;
-                int.TryParse(_numberEntry.Text, out int numberOfWords);
-                var words = _textGeneratorService.GenerateWords(numberOfWords);
+                int.TryParse(_numberEntry.Text, out int numberOfElements);
+                string[] words = null;
+
+                switch (_generatorOptionsComboBox.SelectedIndex)
+                {
+                    case 0:
+                        words = _textGeneratorService.GenerateCharacters(numberOfElements);
+                        break;
+                    case 1:
+                        words = _textGeneratorService.GenerateWords(numberOfElements);
+                        break;
+                    case 2:
+                        words = _textGeneratorService.GenerateSentences(numberOfElements);
+                        break;
+                }
+
                 var result = string.Join(" ", words);
                 editor.InsertAtCaret(result);
 
