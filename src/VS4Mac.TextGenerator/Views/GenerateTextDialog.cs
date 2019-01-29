@@ -10,15 +10,14 @@ namespace VS4Mac.TextGenerator.Views
     public class GenerateTextDialog : Dialog
     {
         VBox _mainBox;
+        HBox _optionsBox;
+        Label _optionsLabel;
+        ComboBox _generatorOptionsComboBox;
         HBox _numberBox;
         Label _numberLabel;
         TextEntry _numberEntry;
         HBox _buttonBox;
         Button _generateButton;
-
-        HBox _optionsBox;
-        Label _optionsLabel;
-        ComboBox _generatorOptionsComboBox;
 
         LipsumGeneratorService _textGeneratorService;
 
@@ -38,7 +37,7 @@ namespace VS4Mac.TextGenerator.Views
             _mainBox = new VBox
             {
                 HeightRequest = 100,
-                WidthRequest = 235
+                WidthRequest = 250
             };
 
             _numberBox = new HBox();
@@ -59,7 +58,12 @@ namespace VS4Mac.TextGenerator.Views
 
             _optionsBox = new HBox();
             _optionsLabel = new Label("Generator option:");
-            _generatorOptionsComboBox = new ComboBox();
+
+            _generatorOptionsComboBox = new ComboBox
+            {
+                WidthRequest = 150
+            };
+
             _generatorOptionsComboBox.Items.Add("Characters");
             _generatorOptionsComboBox.Items.Add("Words");
             _generatorOptionsComboBox.Items.Add("Sentences");
