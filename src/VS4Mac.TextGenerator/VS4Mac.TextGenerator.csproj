@@ -5,6 +5,7 @@
   <ItemGroup>
     <PackageReference Include="MonoDevelop.Addins" Version="0.4.4" />
     <PackageReference Include="NLipsum" Version="1.1.0" />
+    <PackageReference Include="Jeffsum" Version="0.0.2-beta" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\" />

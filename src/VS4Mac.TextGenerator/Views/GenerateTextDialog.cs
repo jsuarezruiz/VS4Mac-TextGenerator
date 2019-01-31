@@ -10,16 +10,21 @@ namespace VS4Mac.TextGenerator.Views
     public class GenerateTextDialog : Dialog
     {
         VBox _mainBox;
+        HBox _typesBox;
+        Label _typesLabel;
+        ComboBox _generatorTypesComboBox;
         HBox _optionsBox;
         Label _optionsLabel;
-        ComboBox _generatorOptionsComboBox;
+        ComboBox _generatorOptionsComboBox;       
         HBox _numberBox;
         Label _numberLabel;
         TextEntry _numberEntry;
         HBox _buttonBox;
         Button _generateButton;
 
-        LipsumGeneratorService _textGeneratorService;
+        ITextGeneratorService _textGeneratorService;
+        Lazy<JeffsumGeneratorService> _jeffsumGeneratorService = new Lazy<JeffsumGeneratorService>();
+        Lazy<LipsumGeneratorService> _lipsumGeneratorService = new Lazy<LipsumGeneratorService>();
 
         public GenerateTextDialog()
         {
@@ -32,12 +37,12 @@ namespace VS4Mac.TextGenerator.Views
         {
             Title = "Text Generator";
 
-            _textGeneratorService = new LipsumGeneratorService();
+            _textGeneratorService = _lipsumGeneratorService.Value;
 
             _mainBox = new VBox
             {
-                HeightRequest = 100,
-                WidthRequest = 250
+                HeightRequest = 130,
+                WidthRequest = 255
             };
 
             _numberBox = new HBox();
@@ -56,6 +61,18 @@ namespace VS4Mac.TextGenerator.Views
                 WidthRequest = 48
             };
 
+            _typesBox = new HBox();
+            _typesLabel = new Label("Generator type:");
+
+            _generatorTypesComboBox = new ComboBox
+            {
+                WidthRequest = 150
+            };
+
+            _generatorTypesComboBox.Items.Add("Lorem Ipsum");
+            _generatorTypesComboBox.Items.Add("Jeffsum");
+            _generatorTypesComboBox.SelectedIndex = 0;
+
             _optionsBox = new HBox();
             _optionsLabel = new Label("Generator option:");
 
@@ -72,6 +89,9 @@ namespace VS4Mac.TextGenerator.Views
 
         void BuildGui()
         {
+            _typesBox.PackStart(_typesLabel);
+            _typesBox.PackEnd(_generatorTypesComboBox);
+
             _optionsBox.PackStart(_optionsLabel);
             _optionsBox.PackEnd(_generatorOptionsComboBox);
 
@@ -79,6 +99,7 @@ namespace VS4Mac.TextGenerator.Views
             _numberBox.PackEnd(_numberEntry, false);
             _buttonBox.PackEnd(_generateButton);
 
+            _mainBox.PackStart(_typesBox);
             _mainBox.PackStart(_optionsBox);
             _mainBox.PackStart(_numberBox);
             _mainBox.PackEnd(_buttonBox);
@@ -94,11 +115,20 @@ namespace VS4Mac.TextGenerator.Views
             _numberEntry.Changed += OnNumberEntryChanged;
             _generateButton.Clicked += OnGenerateClicked;
             _generatorOptionsComboBox.SelectionChanged += OnGeneratorOptionsChanged;
+            _generatorTypesComboBox.SelectionChanged += OnTypeOptionsChanged;
         }
 
         void OnGeneratorOptionsChanged(object sender, EventArgs e)
         {
             _numberLabel.Text = $"Introduce number of {_generatorOptionsComboBox.SelectedItem.ToString().ToLower()}:";
+        }
+
+        void OnTypeOptionsChanged(object sender, EventArgs e)
+        {
+            if(_generatorTypesComboBox.SelectedIndex == 0)
+                _textGeneratorService = _lipsumGeneratorService.Value;
+            else if (_generatorTypesComboBox.SelectedIndex == 1)
+                _textGeneratorService = _jeffsumGeneratorService.Value;
         }
 
         void OnNumberEntryChanged(object sender, EventArgs e)

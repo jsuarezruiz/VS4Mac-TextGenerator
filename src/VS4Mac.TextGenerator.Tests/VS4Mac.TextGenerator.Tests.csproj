@@ -36,6 +36,7 @@
   <ItemGroup>
     <Compile Include="LipsumGeneratorServiceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="JeffsumGeneratorServiceTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
