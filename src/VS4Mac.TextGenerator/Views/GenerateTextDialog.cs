@@ -15,7 +15,7 @@ namespace VS4Mac.TextGenerator.Views
         ComboBox _generatorTypesComboBox;
         HBox _optionsBox;
         Label _optionsLabel;
-        ComboBox _generatorOptionsComboBox;       
+        ComboBox _generatorOptionsComboBox;
         HBox _numberBox;
         Label _numberLabel;
         TextEntry _numberEntry;
