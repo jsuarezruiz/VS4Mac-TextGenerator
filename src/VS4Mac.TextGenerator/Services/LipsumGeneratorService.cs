@@ -3,11 +3,11 @@ using NLipsum.Core;
 
 namespace VS4Mac.TextGenerator.Services
 {
-    public class TextGeneratorService
+    public class LipsumGeneratorService : ITextGeneratorService
     {
         LipsumGenerator _generator;
 
-        public TextGeneratorService()
+        public LipsumGeneratorService()
         {
             _generator = new LipsumGenerator();
         }

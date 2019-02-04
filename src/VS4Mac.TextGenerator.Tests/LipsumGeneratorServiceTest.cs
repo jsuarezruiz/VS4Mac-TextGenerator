@@ -4,12 +4,12 @@ using VS4Mac.TextGenerator.Services;
 namespace VS4Mac.TextGenerator.Tests
 {
     [TestFixture]
-    public class TextGeneratorServiceTests
+    public class LipsumGeneratorServiceTest
     {
         [Test]
         public void GenerateWordsTest()
         {
-            var textGeneratorService = new TextGeneratorService();
+            var textGeneratorService = new LipsumGeneratorService();
             var words = textGeneratorService.GenerateWords(5);
 
             Assert.AreEqual(5, words.Length);
@@ -18,7 +18,7 @@ namespace VS4Mac.TextGenerator.Tests
         [Test]
         public void GenerateSentencesTest()
         {
-            var textGeneratorService = new TextGeneratorService();
+            var textGeneratorService = new LipsumGeneratorService();
             var words = textGeneratorService.GenerateSentences(2);
 
             Assert.AreEqual(2, words.Length);
@@ -27,7 +27,7 @@ namespace VS4Mac.TextGenerator.Tests
         [Test]
         public void GenerateCharactersTest()
         {
-            var textGeneratorService = new TextGeneratorService();
+            var textGeneratorService = new LipsumGeneratorService();
             var words = textGeneratorService.GenerateCharacters(5);
 
             Assert.AreEqual(1, words.Length);
@@ -37,7 +37,7 @@ namespace VS4Mac.TextGenerator.Tests
         [Test]
         public void FirstGenerateCharactersAreNotNewLineOrReturnTest()
         {
-            var textGeneratorService = new TextGeneratorService();
+            var textGeneratorService = new LipsumGeneratorService();
             var words = textGeneratorService.GenerateCharacters(3);
             var characters = words[0];
 
